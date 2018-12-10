@@ -5,8 +5,16 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "sensio/framework-extra-bundle": "^5.1",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^1.6.10",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "doctrine/doctrine-migrations-bundle": "^1.3",
+        "doctrine/orm": "^2.5.11",
+        "phpdocumentor/reflection-docblock": "^3.0|^4.0",
+        "sensio/framework-extra-bundle": "^5.2",
+        "sensiolabs/security-checker": "^5.0",
         "symfony/asset": "4.2.*",
+        "symfony/cache": "^3.3|^4.0",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/expression-language": "4.2.*",
@@ -14,10 +22,11 @@
         "symfony/form": "4.2.*",
         "symfony/framework-bundle": "4.2.*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
         "symfony/process": "4.2.*",
+        "symfony/property-access": "^3.3|^4.0",
+        "symfony/property-info": "^3.3|^4.0",
         "symfony/security-bundle": "4.2.*",
-        "symfony/serializer-pack": "*",
+        "symfony/serializer": "^3.3|^4.0",
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/translation": "4.2.*",
         "symfony/twig-bundle": "4.2.*",
@@ -26,10 +35,18 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
-        "symfony/debug-pack": "*",
+        "easycorp/easy-log-handler": "^1.0.7",
+        "symfony/browser-kit": "^3.3|^4.0",
+        "symfony/css-selector": "^3.3|^4.0",
+        "symfony/debug-bundle": "^3.3|^4.0",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/panther": "*",
+        "symfony/phpunit-bridge": "*",
+        "symfony/stopwatch": "^3.3|^4.0",
+        "symfony/twig-bundle": "^3.3|^4.0",
+        "symfony/var-dumper": "^3.3|^4.0",
+        "symfony/web-profiler-bundle": "^3.3|^4.0",
         "symfony/web-server-bundle": "4.2.*"
     },
     "config": {
@@ -59,7 +76,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "security-checker security:check": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"

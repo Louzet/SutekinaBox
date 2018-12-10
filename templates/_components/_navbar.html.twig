@@ -1,0 +1,42 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-md navbar-dark default-color lighten-1 mb-5">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="{{ path("admin.index") }}">Sutekina Box</a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <ul class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link my-auto" href="#">Home</a>
+            </li>
+        </ul>
+        <!-- Links -->
+
+        <ul class="nav navbar-nav">
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false" role="menuitem">Connexion<span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <li class="nav-item active">
+                        <a class="dropdown-item" href="{{ path("admin.connect") }}">Connexion</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="dropdown-item" href="{{ path("admin.logout") }}">Déconnexion</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </ul>
+    <!-- Collapsible content -->
+</nav>
+<!--/.Navbar-->

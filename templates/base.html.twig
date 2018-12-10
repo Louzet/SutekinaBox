@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html>
+<!--
+       _____  .__        __                  .__
+      /     \ |__| ____ |  | _______    ____ |  |
+     /  \ /  \|  |/ ___\|  |/ /\__  \ _/ __ \|  |
+    /    Y    \  \  \___|    <  / __ \\  ___/|  |__
+    \____|__  /__|\___  >__|_ \(____  /\___  >____/
+            \/        \/     \/     \/     \/
+-->
+<html lang="{{ app.request.defaultLocale }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>
+            {% block title %}
+                {% block page_title '' %}
+                {% block site_title '| SutekinaBox' %}
+            {% endblock %}
+        </title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% include '_components/_navbar.html.twig' %}
+        {% block content %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        {% block main_javascript %}{% endblock %}
+
     </body>
 </html>
