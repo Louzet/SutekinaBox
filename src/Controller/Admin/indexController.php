@@ -2,63 +2,80 @@
 
 namespace App\Controller\Admin;
 
-use App\Form\UserLoginType;
+use App\Entity\Product;
+use App\Repository\UserRepository;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class indexController extends AbstractController
 {
 
+    private $session;
+
+    private $manager;
+
+    private $package;
+
+    /**
+     * indexController constructor.
+     * @param SessionInterface $session
+     * @param ObjectManager $manager
+     * @param Packages $package
+     */
+    public function __construct(SessionInterface $session, ObjectManager $manager, Packages $package)
+    {
+        $this->session = $session->get('session');
+        $this->manager = $manager;
+        $this->package = $package;
+    }
+
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/admin",
-     *     name="admin.index",
+     * @Route("/admin/gestion-commandes",
+     *     name="admin.gestion.commandes",
      *     methods={"GET"})
-     *
      */
-    public function index()
+    public function gestionCommandes()
     {
-        return $this->render("admin/index.html.twig");
-    }
-
-    /**
-     * @Route("/connect",
-     *     name="admin.connect",
-     *     methods={"GET", "POST"})
-     * @param AuthenticationUtils $authenticationUtils
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-    public function connexion(AuthenticationUtils $authenticationUtils, Request $request)
-    {
-
-        if($this->getUser()){
-            return $this->redirectToRoute("admin.index", [], Response::HTTP_MOVED_PERMANENTLY);
+        if(!$this->getUser()){
+            #Si l'utilisateur est déjà connecté, on le redirige
+            return $this->redirectToRoute('admin.connect');
         }
-        $form = $this->createForm(UserLoginType::class, [
-            "username" => $authenticationUtils->getLastUsername()
+
+        $products = $this->manager->getRepository(Product::class)->findAll();
+
+        dump($products);
+        dump($this->getParameter('images_assets_dir'));
+
+        return $this->render("admin/index.html.twig", [
+            'products'  => $products,
+            'package'   => $this->package
         ]);
+    }
 
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        return $this->render("admin/connect.html.twig", [
-            "form"   => $form->createView(),
-            "error"  => $error
-        ]);
-
+    public function gestionMembres()
+    {
+        $repository = $this->manager->getRepository(UserRepository::class);
     }
 
     /**
-     * @Route("/logout",
-     *     name="admin.logout",
-     *     methods={"GET"})
+     * @Route(
+     *     "/admin/gestion-stocks",
+     *     name="admin.gestion.stocks",
+     *     methods={"GET"}
+     * )
+     * @Security("has_role('ROLE_GERANT')")
      */
-    public function logout()
+    public function gestionStocks()
     {
-
+        return new Response("stock");
     }
+
 
 }

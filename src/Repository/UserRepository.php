@@ -19,6 +19,17 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function findAllExpectMe($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->addSelect('u')
+            ->where('u.id !='.$id)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

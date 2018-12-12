@@ -1,0 +1,52 @@
+<div class="row">
+    {{ dump(package) }}
+    {% for product in products %}
+        <div class="col-md-4">
+            <!-- Card deck -->
+            <div class="card-deck">
+
+                <!-- Card -->
+                <div class="card mb-4">
+
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="{{ product.productImage }}" alt="{{ product.title }}">
+                        {#<img class="card-img-top" src="{{ dossier_image~product.id~'.jpg' }}" alt="{{ product.title }}">#}
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!--Title-->
+                        <h4 class="card-title">{{ product.title }}</h4>
+                        <!--Text-->
+                        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                        <div type="button" class="badge badge-warning p-2">{{ product.price }} euros</div>
+
+                        <!-- the number of that left for this item -->
+                        <blockquote class="blockquote">
+                            <span class="badge badge-dark" style="font-size: 0.6rem;">Quantity :</span>
+                            <footer class="blockquote-footer" style="font-size: 0.7rem;"><strong>{{ product.quantity ~' '~ product.title }}</strong> en stock
+                                {% if product.quantity == 0 %}
+                                <div class="alert alert-danger p-2" role="alert">
+                                    Epuisé
+                                </div>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="#">Passer commande</a>
+                                    {% endif %}
+                                {% endif %}
+                            </footer>
+                        </blockquote>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+            </div>
+            <!-- Card deck -->
+        </div>
+    {% endfor %}
+</div>

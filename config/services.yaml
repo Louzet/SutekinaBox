@@ -6,6 +6,9 @@
 parameters:
     locale: 'fr'
 
+    images_dir: 'images/products/'
+    images_assets_dir: '%kernel.project_dir%/public/%images_dir%'
+
 services:
     # default configuration for services in *this* file
     _defaults:

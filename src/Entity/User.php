@@ -209,7 +209,7 @@ class User implements UserInterface, \Serializable
      * @param string $role
      * @return bool
      */
-    public function addRoles(string $role)
+    public function addRoles(string $role) : ?bool
     {
         if(!in_array($role, $this->roles)){
             $this->roles[] = $role;
