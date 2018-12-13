@@ -35,29 +35,6 @@ class indexController extends AbstractController
     }
 
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/admin/gestion-commandes",
-     *     name="admin.gestion.commandes",
-     *     methods={"GET"})
-     */
-    public function gestionCommandes()
-    {
-        if(!$this->getUser()){
-            #Si l'utilisateur est déjà connecté, on le redirige
-            return $this->redirectToRoute('admin.connect');
-        }
-
-        $products = $this->manager->getRepository(Product::class)->findAll();
-
-        dump($products);
-        dump($this->getParameter('images_assets_dir'));
-
-        return $this->render("admin/index.html.twig", [
-            'products'  => $products,
-            'package'   => $this->package
-        ]);
-    }
 
     public function gestionMembres()
     {

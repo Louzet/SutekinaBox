@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -64,10 +66,16 @@ class User implements UserInterface, \Serializable
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="userOrder", orphanRemoval=true)
+     */
+    private $commandes;
+
     public function __construct(string $role = "ROLE_PERSONAL")
     {
         $this->dateInscription = new \DateTime('Europe/Paris');
         $this->addRoles($role);
+        $this->commandes = new ArrayCollection();
     }
 
     /**
@@ -320,5 +328,36 @@ class User implements UserInterface, \Serializable
             $this->derniereConnexion,
             $this->roles
             ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUserOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getUserOrder() === $this) {
+                $commande->setUserOrder(null);
+            }
+        }
+
+        return $this;
     }
 }

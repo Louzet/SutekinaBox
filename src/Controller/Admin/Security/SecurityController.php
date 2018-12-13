@@ -35,7 +35,7 @@ class SecurityController extends AbstractController
     {
         if($this->getUser()){
             #Si l'utilisateur est déjà connecté, on le redirige
-            return $this->redirectToRoute('admin.gestion.commandes');
+            return $this->redirectToRoute('admin.gestion.commande');
         }
 
         $form = $this->createForm(UserLoginType::class, [

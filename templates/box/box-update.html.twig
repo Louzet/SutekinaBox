@@ -1,0 +1,82 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}
+    Box-create Administration
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha256-Kq686ftxGamHGd8MpwJXmYgk1s7m00maEfHX1VpKYP8=" crossorigin="anonymous" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-3">
+            {{ render(controller('App\\Controller\\ComponentsController::sidenav')) }}
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <h2 class="my-4 text-center">Créez une nouvelle box</h2>
+                        {{ form_start(form) }}
+                        <div class="form-group my-2">
+                            {{ form_label(form.name) }}
+                            {{ form_errors(form.name) }}
+                            {{ form_widget(form.name) }}
+                            {{ form_help(form.name) }}
+                        </div>
+                        <div class="form-group my-3">
+                            {{ form_label(form.description) }}
+                            {{ form_errors(form.description) }}
+                            {{ form_widget(form.description) }}
+                            {{ form_help(form.description) }}
+                        </div>
+                        <div class="form-group my-2">
+                            {{ form_label(form.price) }}
+                            {{ form_errors(form.price) }}
+                            {{ form_widget(form.price) }}
+                            {{ form_help(form.price) }}
+                        </div>
+                        <div class="form-group my-2">
+                            {{ form_label(form.image) }}
+                            {{ form_errors(form.image) }}
+                            {{ form_widget(form.image) }}
+                            {{ form_help(form.image) }}
+                        </div>
+                        <div class="form-group my-3">
+                            {{ form_rest(form) }}
+                        </div>
+
+                        <div class="form-group my-2">
+                            <button class="btn btn-success btn-block default-color lighten-1">Apporter les Modifications</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                {#{% include '_components/_listeProducts.html.twig' %}#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha256-SUaao5Q7ifr2twwET0iyXVy0OVnuFJhGVi5E/dqEiLU=" crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $('.dropify').dropify({
+            messages: {
+                default: 'Glissez-d&eacute;posez un fichier ici ou cliquez',
+                replace: 'Glissez-d&eacute;posez un fichier ou cliquez pour remplacer',
+                remove:  'Supprimer',
+                error:   'D&eacute;sol&eacute;, le fichier est trop volumineux'
+            }
+        });
+    </script>
+{% endblock %}
+

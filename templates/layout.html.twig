@@ -11,6 +11,7 @@
 
     <link href="{{ asset('css/reset.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/normalize.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet"/>
@@ -34,12 +35,15 @@
     <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/mdb.min.js') }}" type="text/javascript"></script>
+    {#<script src="{{ asset('js/jquery-ui.min.js') }}" type="text/javascript"></script>#}
 
     <script type="text/javascript">
-        // SideNav Options
-        $('.button-collapse').sideNav({
-            edge: 'right', // Choose the horizontal origin
-            closeOnClick: true // Closes side-nav on &lt;a&gt; clicks, useful for Angular/Meteor
+        $(document).ready(function() {
+            // SideNav Options
+            /*$('.button-collapse').sideNav({
+                edge: 'right', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on &lt;a&gt; clicks, useful for Angular/Meteor
+            });*/
         });
     </script>
 {% endblock %}

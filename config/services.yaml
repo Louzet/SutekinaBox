@@ -4,10 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'fr'
+    locale: 'en'
 
     images_dir: 'images/products/'
     images_assets_dir: '%kernel.project_dir%/public/%images_dir%'
+    images_box: '%kernel.project_dir%/public/images/box'
 
 services:
     # default configuration for services in *this* file

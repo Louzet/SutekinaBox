@@ -1,5 +1,5 @@
 <div class="row">
-    {{ dump(package) }}
+
     {% for product in products %}
         <div class="col-md-4">
             <!-- Card deck -->
@@ -24,19 +24,25 @@
                         <h4 class="card-title">{{ product.title }}</h4>
                         <!--Text-->
                         <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                        <div type="button" class="badge badge-warning p-2">{{ product.price }} euros</div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span type="button" class="badge badge-warning p-2">{{ product.price }} euros</span>
+                            </div>
+                            <div class="col-md-7 offset-md-1">
+                                {% if product.quantity == 0 and is_granted('ROLE_ADMIN') %}
+                                    <span style="font-size: 0.7rem;"><a href="{{ path('admin.gestion.commande') }}">Passer commande</a></span>
+                                {% endif %}
+                            </div>
+                        </div>
 
                         <!-- the number of that left for this item -->
                         <blockquote class="blockquote">
                             <span class="badge badge-dark" style="font-size: 0.6rem;">Quantity :</span>
                             <footer class="blockquote-footer" style="font-size: 0.7rem;"><strong>{{ product.quantity ~' '~ product.title }}</strong> en stock
                                 {% if product.quantity == 0 %}
-                                <div class="alert alert-danger p-2" role="alert">
-                                    Epuisé
-                                </div>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a href="#">Passer commande</a>
-                                    {% endif %}
+                                    <div class="alert alert-danger p-2 text-center" role="alert">
+                                        <strong>Epuisé</strong>
+                                    </div>
                                 {% endif %}
                             </footer>
                         </blockquote>

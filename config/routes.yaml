@@ -1,3 +1,4 @@
-index:
+admin.gestion.box.list:
     path: /
-    controller: App\Controller\Admin\indexController::gestionCommandes
+    controller: App\Controller\Admin\Box\BoxController::listBox
+

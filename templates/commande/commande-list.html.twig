@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}
+    Commandes
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-3">
+            {{ render(controller('App\\Controller\\ComponentsController::sidenav')) }}
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="row">
+                    {% include '_components/_productSpend.html.twig' %}
+                </div>
+
+                {#{% include '_components/_listeProducts.html.twig' %}#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

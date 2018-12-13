@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,23 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $quantity;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Box", mappedBy="products")
+     */
+    private $relationBoxes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Box", mappedBy="Products")
+     */
+    private $relatedBoxes;
+
+    public function __construct()
+    {
+        $this->relationBoxes = new ArrayCollection();
+
+        $this->relatedBoxes = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -113,6 +132,62 @@ class Product
     public function setProductImage(string $productImage): self
     {
         $this->productImage = $productImage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Box[]
+     */
+    public function getRelationBoxes(): Collection
+    {
+        return $this->relationBoxes;
+    }
+
+    public function addRelationBox(Box $relationBox): self
+    {
+        if (!$this->relationBoxes->contains($relationBox)) {
+            $this->relationBoxes[] = $relationBox;
+            $relationBox->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelationBox(Box $relationBox): self
+    {
+        if ($this->relationBoxes->contains($relationBox)) {
+            $this->relationBoxes->removeElement($relationBox);
+            $relationBox->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Box[]
+     */
+    public function getRelatedBoxes(): Collection
+    {
+        return $this->relatedBoxes;
+    }
+
+    public function addRelatedBox(Box $relatedBox): self
+    {
+        if (!$this->relatedBoxes->contains($relatedBox)) {
+            $this->relatedBoxes[] = $relatedBox;
+            $relatedBox->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelatedBox(Box $relatedBox): self
+    {
+        if ($this->relatedBoxes->contains($relatedBox)) {
+            $this->relatedBoxes->removeElement($relatedBox);
+            $relatedBox->removeProduct($this);
+        }
 
         return $this;
     }

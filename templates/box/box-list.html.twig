@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}
+    Box Administration
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-3">
+            {{ render(controller('App\\Controller\\ComponentsController::sidenav')) }}
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="row">
+                    <div class="col-md-12 pull-right">
+                        <a href="{{ path('admin.gestion.box.create') }}" class="btn btn-success">Créer une Box</a>
+                    </div>
+                </div>
+                <div class="row">
+                        {% for box in boxes %}
+                        <div class="col-md-4 col-xs-6 mt-5">
+                            <div class="card text-center">
+                                <div class="card-header alert alert-info">
+                                    {{ box.name }}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ box.name }}</h5>
+                                    <div>
+                                        <p class="card-text px-5">{{ box.description }}</p>
+                                    </div>
+                                    <a href="{{ path('admin.gestion.box.show', {
+                                        'id': box.id
+                                    })
+                                    }}" class="btn btn-primary">
+
+                                        Voir
+                                    </a>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    {#timestamp#}
+                                    {{ box.price }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {#{% include '_components/_listeProducts.html.twig' %}#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

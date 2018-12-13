@@ -29,6 +29,16 @@ class ProductRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findProductSpent()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.quantity = 0')
+            ->orderBy('p.title')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
